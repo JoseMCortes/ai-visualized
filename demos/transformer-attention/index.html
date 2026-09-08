@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Self-Attention, Visualized</title>
+    <style>
+      body {
+        margin: 0;
+        font:
+          14px/1.5 system-ui,
+          sans-serif;
+        background: #0b0b0f;
+        color: #e6e6e6;
+      }
+      main {
+        max-width: 780px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      canvas {
+        width: 100%;
+        height: auto;
+        border: 1px solid #2a2a33;
+        border-radius: 6px;
+      }
+      a {
+        color: #7aa2f7;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Self-Attention, Visualized</h1>
+      <p>
+        Work in progress. This demo will animate scaled dot-product attention across a sentence, one
+        head at a time. See the
+        <a href="https://github.com/JoseMCortes/ai-visualized/blob/main/docs/ROADMAP.md">roadmap</a
+        >.
+      </p>
+      <canvas id="attention-canvas" width="720" height="240"></canvas>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

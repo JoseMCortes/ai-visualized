@@ -1,0 +1,26 @@
+{
+  "name": "ai-visualized",
+  "version": "0.0.0",
+  "private": true,
+  "description": "From-scratch, interactive visual explainers for modern AI and ML.",
+  "license": "MIT",
+  "author": "Jose Cortes <info@josecortes.net>",
+  "type": "module",
+  "workspaces": [
+    "demos/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "prettier --check .",
+    "format": "prettier --write .",
+    "dev:transformer": "npm run dev --workspace @ai-visualized/transformer-attention"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -4,41 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Self-Attention, Visualized</title>
-    <style>
-      body {
-        margin: 0;
-        font:
-          14px/1.5 system-ui,
-          sans-serif;
-        background: #0b0b0f;
-        color: #e6e6e6;
-      }
-      main {
-        max-width: 780px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-      }
-      canvas {
-        width: 100%;
-        height: auto;
-        border: 1px solid #2a2a33;
-        border-radius: 6px;
-      }
-      a {
-        color: #7aa2f7;
-      }
-    </style>
+    <meta
+      name="description"
+      content="A 0.8M-parameter GPT trained on Shakespeare, running from scratch in your browser, with its attention drawn character by character."
+    />
   </head>
   <body>
     <main>
-      <h1>Self-Attention, Visualized</h1>
-      <p>
-        Work in progress. This demo will animate scaled dot-product attention across a sentence, one
-        head at a time. See the
-        <a href="https://github.com/JoseMCortes/ai-visualized/blob/main/docs/ROADMAP.md">roadmap</a
-        >.
-      </p>
-      <canvas id="attention-canvas" width="720" height="240"></canvas>
+      <header>
+        <h1>Self-Attention, Visualized</h1>
+        <p class="sub">
+          A 0.8M-parameter GPT, trained on Shakespeare and re-implemented from scratch to run in
+          your browser. Type a phrase and see which earlier characters each position attends to —
+          the mechanism at the heart of every transformer.
+        </p>
+      </header>
+
+      <section id="app"></section>
+
+      <section class="howto">
+        <h2>How to read this</h2>
+        <ol>
+          <li>
+            Every character becomes a vector. Through <strong>self-attention</strong>, each position
+            builds its next-step representation by pulling in information from earlier positions.
+          </li>
+          <li>
+            The <strong>arc diagram</strong> shows one query character (highlighted) and the arcs to
+            the earlier characters it draws from. Thicker, brighter arc = more attention weight.
+          </li>
+          <li>
+            The <strong>heatmap</strong> is the whole matrix: row = query character, column = key
+            character, brightness = weight. It is triangular because a position can only look
+            backwards.
+          </li>
+          <li>
+            <strong>Layer</strong> and <strong>Head</strong> pick which of the model's 4 × 4
+            attention patterns you are looking at. Different heads specialise — some track the
+            previous character, some jump to punctuation or the start of a word.
+          </li>
+        </ol>
+      </section>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>

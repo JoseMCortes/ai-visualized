@@ -4,7 +4,7 @@ Demo 1 of [`ai-visualized`](../../README.md). A 0.8M-parameter character-level
 GPT, trained on Shakespeare and re-implemented from scratch in TypeScript, runs
 in the browser while its attention is drawn character by character.
 
-**Live:** <https://josemcortes.github.io/ai-visualized/>
+**Live:** <https://josemcortes.github.io/ai-visualized/transformer/>
 
 ## What you see
 

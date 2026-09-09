@@ -1,0 +1,5 @@
+# Raw GloVe download (~160 MB extracted). The filtered result in
+# ../public/embeddings.json is committed instead.
+glove*
+*.zip
+*.txt

@@ -1,7 +1,9 @@
-name: Deploy demo to Pages
+name: Deploy demos to Pages
 
-# Publishes demos/transformer-attention to
-# https://josemcortes.github.io/ai-visualized/
+# Builds the landing page + every demo into one site:
+#   /ai-visualized/              landing/index.html
+#   /ai-visualized/transformer/  demos/transformer-attention
+#   /ai-visualized/embeddings/   demos/embeddings
 
 on:
   push:
@@ -27,13 +29,28 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run build --workspace @ai-visualized/transformer-attention
+
+      - name: Build transformer demo
+        run: npm run build --workspace @ai-visualized/transformer-attention
         env:
-          VITE_BASE: /ai-visualized/
+          VITE_BASE: /ai-visualized/transformer/
+
+      - name: Build embeddings demo
+        run: npm run build --workspace @ai-visualized/embeddings
+        env:
+          VITE_BASE: /ai-visualized/embeddings/
+
+      - name: Assemble site
+        run: |
+          mkdir -p site/transformer site/embeddings
+          cp landing/index.html site/index.html
+          cp -r demos/transformer-attention/dist/* site/transformer/
+          cp -r demos/embeddings/dist/* site/embeddings/
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: demos/transformer-attention/dist
+          path: site
 
   deploy:
     needs: build

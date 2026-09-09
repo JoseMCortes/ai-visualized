@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Embeddings, Visualized</title>
+    <meta
+      name="description"
+      content="What a word embedding is: words become vectors, nearby means similar, and directions carry meaning — shown on real GloVe vectors and a hand-built toy."
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Word Embeddings, Visualized</h1>
+        <p class="sub">
+          An embedding turns a word into a list of numbers — a point in space — so that words with
+          related meaning land near each other and consistent relationships become consistent
+          directions. Below: a hand-built toy to build intuition, then ~250 real
+          <a href="https://nlp.stanford.edu/projects/glove/">GloVe</a> vectors.
+        </p>
+      </header>
+
+      <section id="app"></section>
+
+      <section class="howto">
+        <h2>How to read this</h2>
+        <ol>
+          <li>
+            Every word is a <strong>vector</strong> — here 50 numbers from GloVe, trained so that
+            words appearing in similar contexts get similar vectors.
+          </li>
+          <li>
+            <strong>Nearby = similar.</strong> Hover a word to see its closest neighbours by
+            <strong>cosine similarity</strong> (the angle between the two vectors).
+          </li>
+          <li>
+            <strong>Directions carry meaning.</strong> The analogy tool computes
+            <code>a − b + d</code> and lands you near a real word:
+            <em>king − man + woman ≈ queen</em>, <em>paris − france + germany ≈ berlin</em>.
+          </li>
+          <li>
+            50 dimensions can't be drawn, so the map is a <strong>2-D projection</strong> — PCA
+            (keeps the biggest spread) or t-SNE (keeps neighbourhoods). Both lose information;
+            switch between them to see what changes.
+          </li>
+        </ol>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

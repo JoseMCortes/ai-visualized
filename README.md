@@ -17,9 +17,12 @@ write-up of the math and the design trade-offs.
 
 ## Demos
 
-| Demo                          |                                                                                                                               |                                                                                                                         |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| **Self-attention visualizer** | a 0.8M-parameter char-level GPT running in-browser, its attention drawn as arcs and a heatmap, with token-by-token generation | [live](https://josemcortes.github.io/ai-visualized/) · [`demos/transformer-attention/`](./demos/transformer-attention/) |
+**Live: <https://josemcortes.github.io/ai-visualized/>**
+
+| Demo                            |                                                                                                                               |                                                                                                                                     |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Self-Attention, Visualized**  | a 0.8M-parameter char-level GPT running in-browser, its attention drawn as arcs and a heatmap, with token-by-token generation | [live](https://josemcortes.github.io/ai-visualized/transformer/) · [`demos/transformer-attention/`](./demos/transformer-attention/) |
+| **Word Embeddings, Visualized** | words as vectors — nearby means similar, directions carry meaning; a hand-built toy plus ~250 real GloVe vectors              | [live](https://josemcortes.github.io/ai-visualized/embeddings/) · [`demos/embeddings/`](./demos/embeddings/)                        |
 
 More are planned (autograd, an MLP playground, a tokenizer explorer, a tiny
 diffusion model, some classic ML) — added here as they land.
@@ -36,8 +39,10 @@ diffusion model, some classic ML) — added here as they land.
 
 ```
 demos/
-  transformer-attention/   # self-attention visualizer (live)
-training/                  # PyTorch training + export for its model
+  transformer-attention/   # self-attention visualizer
+  embeddings/              # word embeddings visualizer
+training/                  # PyTorch training + export for the GPT
+landing/                   # the gallery page for the deployed site
 ```
 
 Each demo is an npm workspace under `demos/`.
@@ -45,11 +50,12 @@ Each demo is an npm workspace under `demos/`.
 ## Develop
 
 ```bash
-npm install            # install all workspaces
-npm test               # run every demo's unit tests
-npm run build          # type-check + build every demo
-npm run lint           # prettier --check
+npm install             # install all workspaces
+npm test                # run every demo's unit tests
+npm run build           # type-check + build every demo
+npm run lint            # prettier --check
 npm run dev:transformer # run the self-attention demo locally
+npm run dev:embeddings  # run the embeddings demo locally
 ```
 
 Requires Node ≥ 20.

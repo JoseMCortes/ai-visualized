@@ -18,6 +18,12 @@
           your browser. Type a phrase and see which earlier characters each position attends to —
           the mechanism at the heart of every transformer.
         </p>
+        <p class="disclaimer">
+          This model is deliberately tiny — 0.8M parameters, character-level, trained for a few
+          minutes on ~1&nbsp;MB of text. It is here to make the attention mechanism legible, not to
+          write well. Expect Shakespeare-flavoured gibberish from <strong>Generate</strong>, not
+          coherent sentences; real quality needs a model hundreds of times larger.
+        </p>
       </header>
 
       <section id="app"></section>
@@ -48,7 +54,9 @@
             <strong>Next character</strong> bars are the model's probability for each possible next
             character; <strong>temperature</strong>, <strong>top-k</strong> and
             <strong>top-p</strong> reshape that distribution before one character is drawn from it.
-            Generated characters are tinted, and the attention updates as the text grows.
+            Generated characters are tinted, and the attention updates as the text grows. At this
+            size the model only learns the surface texture of its training text, so the output will
+            not be coherent — that is expected.
           </li>
         </ol>
       </section>

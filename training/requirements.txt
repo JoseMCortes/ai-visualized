@@ -1,0 +1,3 @@
+# Training the tiny GPT. Both are already common in an ML environment.
+torch>=2.2
+numpy>=1.24

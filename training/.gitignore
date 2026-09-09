@@ -1,0 +1,9 @@
+# Regenerable: `python prepare_data.py` rebuilds these.
+data/
+
+# The full-precision checkpoint (~3 MB). The quantized browser weights in
+# demos/transformer-attention/public/model/ are committed instead;
+# `python train.py && python export.py` regenerates this.
+out/
+
+__pycache__/

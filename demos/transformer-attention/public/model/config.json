@@ -1,0 +1,346 @@
+{
+  "arch": {
+    "block_size": 128,
+    "vocab_size": 65,
+    "n_layer": 4,
+    "n_head": 4,
+    "n_embd": 128
+  },
+  "layernorm_eps": 1e-05,
+  "gelu": "tanh",
+  "tie_word_embeddings": true,
+  "quantization": "per-tensor-symmetric-int8",
+  "bin_layout": "For each tensor in `tensors` order: little-endian float32 `scale`, then int8[prod(shape)] row-major. Dequantize with w = q * scale. lm_head reuses wte.weight.",
+  "tensors": [
+    {
+      "name": "wte.weight",
+      "shape": [
+        65,
+        128
+      ]
+    },
+    {
+      "name": "wpe.weight",
+      "shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "name": "blocks.0.ln_1.weight",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.0.ln_1.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.0.attn.c_attn.weight",
+      "shape": [
+        384,
+        128
+      ]
+    },
+    {
+      "name": "blocks.0.attn.c_attn.bias",
+      "shape": [
+        384
+      ]
+    },
+    {
+      "name": "blocks.0.attn.c_proj.weight",
+      "shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "name": "blocks.0.attn.c_proj.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.0.ln_2.weight",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.0.ln_2.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.0.mlp.c_fc.weight",
+      "shape": [
+        512,
+        128
+      ]
+    },
+    {
+      "name": "blocks.0.mlp.c_fc.bias",
+      "shape": [
+        512
+      ]
+    },
+    {
+      "name": "blocks.0.mlp.c_proj.weight",
+      "shape": [
+        128,
+        512
+      ]
+    },
+    {
+      "name": "blocks.0.mlp.c_proj.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.1.ln_1.weight",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.1.ln_1.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.1.attn.c_attn.weight",
+      "shape": [
+        384,
+        128
+      ]
+    },
+    {
+      "name": "blocks.1.attn.c_attn.bias",
+      "shape": [
+        384
+      ]
+    },
+    {
+      "name": "blocks.1.attn.c_proj.weight",
+      "shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "name": "blocks.1.attn.c_proj.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.1.ln_2.weight",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.1.ln_2.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.1.mlp.c_fc.weight",
+      "shape": [
+        512,
+        128
+      ]
+    },
+    {
+      "name": "blocks.1.mlp.c_fc.bias",
+      "shape": [
+        512
+      ]
+    },
+    {
+      "name": "blocks.1.mlp.c_proj.weight",
+      "shape": [
+        128,
+        512
+      ]
+    },
+    {
+      "name": "blocks.1.mlp.c_proj.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.2.ln_1.weight",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.2.ln_1.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.2.attn.c_attn.weight",
+      "shape": [
+        384,
+        128
+      ]
+    },
+    {
+      "name": "blocks.2.attn.c_attn.bias",
+      "shape": [
+        384
+      ]
+    },
+    {
+      "name": "blocks.2.attn.c_proj.weight",
+      "shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "name": "blocks.2.attn.c_proj.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.2.ln_2.weight",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.2.ln_2.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.2.mlp.c_fc.weight",
+      "shape": [
+        512,
+        128
+      ]
+    },
+    {
+      "name": "blocks.2.mlp.c_fc.bias",
+      "shape": [
+        512
+      ]
+    },
+    {
+      "name": "blocks.2.mlp.c_proj.weight",
+      "shape": [
+        128,
+        512
+      ]
+    },
+    {
+      "name": "blocks.2.mlp.c_proj.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.3.ln_1.weight",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.3.ln_1.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.3.attn.c_attn.weight",
+      "shape": [
+        384,
+        128
+      ]
+    },
+    {
+      "name": "blocks.3.attn.c_attn.bias",
+      "shape": [
+        384
+      ]
+    },
+    {
+      "name": "blocks.3.attn.c_proj.weight",
+      "shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "name": "blocks.3.attn.c_proj.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.3.ln_2.weight",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.3.ln_2.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "blocks.3.mlp.c_fc.weight",
+      "shape": [
+        512,
+        128
+      ]
+    },
+    {
+      "name": "blocks.3.mlp.c_fc.bias",
+      "shape": [
+        512
+      ]
+    },
+    {
+      "name": "blocks.3.mlp.c_proj.weight",
+      "shape": [
+        128,
+        512
+      ]
+    },
+    {
+      "name": "blocks.3.mlp.c_proj.bias",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "ln_f.weight",
+      "shape": [
+        128
+      ]
+    },
+    {
+      "name": "ln_f.bias",
+      "shape": [
+        128
+      ]
+    }
+  ]
+}

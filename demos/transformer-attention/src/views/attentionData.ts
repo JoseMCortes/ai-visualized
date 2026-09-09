@@ -38,3 +38,27 @@ export function maxWeight(matrix: number[][]): number {
   for (const row of matrix) for (const v of row) if (v > m) m = v;
   return m || 1;
 }
+
+/**
+ * The scaled-dot-product scores (qᵢ·kⱼ/√dₖ, before softmax) for one layer and
+ * head, or averaged over heads. Masked positions stay NaN.
+ */
+export function scoreMatrix(trace: ForwardTrace, layer: number, head: HeadSelection): number[][] {
+  const heads = trace.scores[layer];
+  if (!heads) throw new Error(`no layer ${layer} in trace`);
+  if (head !== 'mean') {
+    const m = heads[head];
+    if (!m) throw new Error(`no head ${head} in layer ${layer}`);
+    return m;
+  }
+  const t = heads[0]!.length;
+  const out = Array.from({ length: t }, () => new Array<number>(t).fill(NaN));
+  for (let i = 0; i < t; i++) {
+    for (let j = 0; j <= i; j++) {
+      let sum = 0;
+      for (const h of heads) sum += h[i]![j]!;
+      out[i]![j] = sum / heads.length;
+    }
+  }
+  return out;
+}

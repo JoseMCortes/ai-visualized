@@ -4,6 +4,8 @@ import { attentionMatrix, maxWeight } from './attentionData';
 import { accent, arcPath, clamp, emphasize } from './geometry';
 import { glyph } from './glyph';
 import { topProbabilities } from './probBars';
+import { scoreMatrix } from './attentionData';
+import { topKeysByWeight } from './computeSteps';
 
 function trace(): ForwardTrace {
   return {
@@ -19,6 +21,18 @@ function trace(): ForwardTrace {
         [
           [1, 0],
           [0.2, 0.8],
+        ],
+      ],
+    ],
+    scores: [
+      [
+        [
+          [0, NaN],
+          [0.1, 0.1],
+        ],
+        [
+          [0, NaN],
+          [-0.5, 0.9],
         ],
       ],
     ],
@@ -96,6 +110,30 @@ describe('maxWeight / glyph', () => {
     expect(glyph(' ')).toBe('␣');
     expect(glyph('\n')).toBe('⏎');
     expect(glyph('x')).toBe('x');
+  });
+});
+
+describe('scoreMatrix', () => {
+  it('returns the scaled scores for one head, NaN where masked', () => {
+    const m = scoreMatrix(trace(), 0, 1);
+    expect(m[1]).toEqual([-0.5, 0.9]);
+    expect(Number.isNaN(m[0]![1]!)).toBe(true);
+  });
+
+  it('averages heads for "mean" and leaves masked entries NaN', () => {
+    const m = scoreMatrix(trace(), 0, 'mean');
+    expect(m[1]![0]).toBeCloseTo((0.1 + -0.5) / 2);
+    expect(Number.isNaN(m[0]![1]!)).toBe(true);
+  });
+});
+
+describe('topKeysByWeight', () => {
+  it('returns key indices by descending weight, skipping zeros', () => {
+    expect(topKeysByWeight([0.1, 0, 0.6, 0.3], 4)).toEqual([2, 3, 0]);
+  });
+
+  it('caps at k', () => {
+    expect(topKeysByWeight([0.4, 0.3, 0.2, 0.1], 2)).toEqual([0, 1]);
   });
 });
 

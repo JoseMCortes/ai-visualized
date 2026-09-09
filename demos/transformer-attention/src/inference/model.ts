@@ -83,6 +83,7 @@ export class GPTModel {
     }
 
     const attention: number[][][][] = [];
+    const scores: number[][][][] = [];
     const residual: number[][][] = opts.residual ? [x.map((r) => r.slice())] : [];
 
     // 2. transformer blocks --------------------------------------------------
@@ -98,29 +99,36 @@ export class GPTModel {
         new Array<number>(n_embd).fill(0),
       );
       const layerAttention: number[][][] = [];
+      const layerScores: number[][][] = [];
 
       for (let h = 0; h < n_head; h++) {
         const qOff = h * headDim;
         const kOff = n_embd + h * headDim;
         const vOff = 2 * n_embd + h * headDim;
         const headAttention: number[][] = new Array(T);
+        const headScores: number[][] = new Array(T);
 
         for (let i = 0; i < T; i++) {
-          // scores against every key j <= i (causal), scaled by 1/sqrt(headDim)
-          const scores = new Array<number>(i + 1);
+          // scaled dot-product scores against every key j <= i (causal)
+          const rowScores = new Array<number>(i + 1);
           const qi = qkv[i]!;
           for (let j = 0; j <= i; j++) {
             const kj = qkv[j]!;
             let dot = 0;
             for (let d = 0; d < headDim; d++) dot += qi[qOff + d]! * kj[kOff + d]!;
-            scores[j] = dot * invSqrtHd;
+            rowScores[j] = dot * invSqrtHd;
           }
-          const weights = softmax(scores);
+          const weights = softmax(rowScores);
 
-          // record the full-width row (zeros for the masked-out future)
-          const rowFull = new Array<number>(T).fill(0);
-          for (let j = 0; j <= i; j++) rowFull[j] = weights[j]!;
-          headAttention[i] = rowFull;
+          // record full-width rows (masked-out future is 0 for weights, NaN for scores)
+          const weightRow = new Array<number>(T).fill(0);
+          const scoreRow = new Array<number>(T).fill(NaN);
+          for (let j = 0; j <= i; j++) {
+            weightRow[j] = weights[j]!;
+            scoreRow[j] = rowScores[j]!;
+          }
+          headAttention[i] = weightRow;
+          headScores[i] = scoreRow;
 
           // context vector = Σ_j weights[j] · value[j]
           const outI = attnOut[i]!;
@@ -131,8 +139,10 @@ export class GPTModel {
           }
         }
         layerAttention.push(headAttention);
+        layerScores.push(headScores);
       }
       attention.push(layerAttention);
+      scores.push(layerScores);
 
       const attnProj = linear(
         attnOut,
@@ -160,7 +170,15 @@ export class GPTModel {
     const xf = layerNorm(x, this.vec('ln_f.weight'), this.vec('ln_f.bias'), eps);
     const logits = linear(xf, wte, null); // wte is [vocab, C] -> logits[t] is [vocab]
 
-    return { ids: ids.slice(), nLayer: n_layer, nHead: n_head, attention, residual, logits };
+    return {
+      ids: ids.slice(),
+      nLayer: n_layer,
+      nHead: n_head,
+      attention,
+      scores,
+      residual,
+      logits,
+    };
   }
 
   /**

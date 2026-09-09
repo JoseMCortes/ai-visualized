@@ -13,14 +13,16 @@ modern AI first, then neural-net fundamentals, then classic ML, then RL/agents.
 
 ## Starter set
 
-### 1. Self-attention visualizer — _in progress_
+### 1. Self-attention visualizer — _done_ · [live](https://josemcortes.github.io/ai-visualized/)
 
 Tokens → embeddings → Q / K / V → scaled dot-product scores → softmax →
-weighted sum. Animate the attention pattern across a sentence, one head at a
-time. Stretch goal: a tiny char-level GPT running in-browser with live
-next-token probability bars.
+weighted sum, drawn as an arc diagram and a heatmap across a phrase, one head
+at a time. A 0.8M-parameter char-level GPT (trained in `training/`, re-run from
+scratch in TypeScript) generates text one character at a time with live
+next-character probability bars and temperature / top-k / top-p controls, and a
+panel breaks down how each attention weight is computed.
 
-Core code lives in `demos/transformer-attention/src/attention.ts`.
+See `demos/transformer-attention/`.
 
 ### 2. Autograd / backprop engine
 

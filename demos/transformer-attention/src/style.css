@@ -371,6 +371,86 @@ a {
   text-align: right;
 }
 
+/* --- how a weight is computed --- */
+.compute {
+  padding: 0.9rem 1rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.compute-heading {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
+  margin-bottom: 0.5rem;
+}
+
+.compute-formula {
+  font:
+    11px ui-monospace,
+    monospace;
+  color: var(--ink-dim);
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.compute-rows {
+  display: grid;
+  gap: 4px;
+}
+
+.compute-row {
+  display: grid;
+  grid-template-columns: 4ch 4.5ch 1.4ch 1fr;
+  align-items: center;
+  gap: 0.5rem;
+  font:
+    12px ui-monospace,
+    monospace;
+}
+
+.compute-key {
+  color: var(--ink);
+}
+
+.compute-score {
+  text-align: right;
+}
+
+.compute-score[data-sign='neg'] {
+  color: #f0a3a3;
+}
+
+.compute-score[data-sign='pos'] {
+  color: #9fd0a8;
+}
+
+.compute-arrow {
+  color: var(--ink-dim);
+  text-align: center;
+}
+
+.compute-weight {
+  display: grid;
+  grid-template-columns: 1fr 5ch;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.compute-weight-bar {
+  height: 10px;
+  border-radius: 2px;
+  min-width: 2px;
+}
+
+.compute-weight-num {
+  color: var(--ink-dim);
+  text-align: right;
+}
+
 .status {
   padding: 1rem;
   color: var(--ink-dim);

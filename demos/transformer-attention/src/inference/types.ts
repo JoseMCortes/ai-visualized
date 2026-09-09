@@ -42,6 +42,8 @@ export interface ForwardTrace {
   nHead: number;
   /** attention[layer][head][queryPos][keyPos] — softmax weights, causal so [i][j] = 0 for j > i. */
   attention: number[][][][];
+  /** scores[layer][head][queryPos][keyPos] — scaled dot products qᵢ·kⱼ/√dₖ before softmax; NaN for j > i. */
+  scores: number[][][][];
   /** residual[0] = embeddings; residual[l+1] = stream after block l. Empty unless `residual` was requested. */
   residual: number[][][];
   /** logits[pos][vocabId] — unnormalized next-token scores at every position. */

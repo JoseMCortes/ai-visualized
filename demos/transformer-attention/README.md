@@ -4,6 +4,8 @@ Demo 1 of [`ai-visualized`](../../README.md). A 0.8M-parameter character-level
 GPT, trained on Shakespeare and re-implemented from scratch in TypeScript, runs
 in the browser while its attention is drawn character by character.
 
+**Live:** <https://josemcortes.github.io/ai-visualized/>
+
 ## What you see
 
 - **Arc diagram** — the characters on a line. For the focused character, an arc
@@ -11,11 +13,15 @@ in the browser while its attention is drawn character by character.
   more weight. Hover any character to follow its attention.
 - **Heatmap** — the whole `query × key` matrix for the chosen layer and head.
   Triangular, because a position can only look backwards.
+- **Next character** — the model's probability for each possible next character;
+  temperature / top-k / top-p reshape it, then **Generate** draws from it one
+  character at a time (generated characters are tinted).
+- **How a weight is computed** — for the focused character, the scaled score
+  `qᵢ·kⱼ/√dₖ` against each key and how softmax turns those into the weights.
 - **Layer / Head** — pick any of the model's 4 × 4 attention patterns, or the
   mean over heads.
 
-Both views are driven by the same real forward pass — type a new phrase and the
-model re-runs.
+Every view is driven by the same real forward pass.
 
 ## How it works
 
@@ -45,4 +51,6 @@ npm test --workspace @ai-visualized/transformer-attention
 - [x] Attention arc diagram + heatmap, layer/head selection
 - [x] Token-by-token generation with next-character probability bars and
       temperature / top-k / top-p controls
-- [ ] Step-through of the forward pass; deploy to GitHub Pages
+- [x] Score → softmax → weight breakdown for the focused character
+- [x] Deployed to GitHub Pages
+- [ ] Nice-to-have: full forward-pass stage walkthrough (embed → blocks → logits)

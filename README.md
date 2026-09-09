@@ -15,17 +15,21 @@ Q·Kᵀ, scale it, softmax it, and read every intermediate value back out. Each
 demo therefore doubles as a readable reference implementation, with a short
 write-up of the math and the design trade-offs.
 
+## Live
+
+- **Self-attention visualizer** → <https://josemcortes.github.io/ai-visualized/>
+
 ## Roadmap
 
 Priority order. Status: 🟢 done · 🟡 in progress · ⚪ planned.
 
-| #   | Demo                          | Theme                                                                                                        | Status |
-| --- | ----------------------------- | ------------------------------------------------------------------------------------------------------------ | ------ |
-| 1   | **Self-attention visualizer** | tokens → Q/K/V → attention weights per head; tiny char-level GPT in-browser with next-token probability bars | 🟡     |
-| 2   | Autograd / backprop engine    | micrograd-style scalar autograd, live computation graph, forward values + backward gradients                 | ⚪     |
-| 3   | MLP training playground       | decision boundary evolving during training on spirals/moons; neurons, weights, activations                   | ⚪     |
-| 4   | Tokenizer / BPE explorer      | watch BPE merges build a vocab; token boundaries on arbitrary text; compare tokenizers                       | ⚪     |
-| 5   | Tiny diffusion model          | forward noising / reverse denoising on 2D distributions and small images, step by step                       | ⚪     |
+| #   | Demo                          | Theme                                                                                                         | Status |
+| --- | ----------------------------- | ------------------------------------------------------------------------------------------------------------- | ------ |
+| 1   | **Self-attention visualizer** | tokens → Q/K/V → attention weights per head; tiny char-level GPT in-browser, generation with probability bars | 🟢     |
+| 2   | Autograd / backprop engine    | micrograd-style scalar autograd, live computation graph, forward values + backward gradients                  | ⚪     |
+| 3   | MLP training playground       | decision boundary evolving during training on spirals/moons; neurons, weights, activations                    | ⚪     |
+| 4   | Tokenizer / BPE explorer      | watch BPE merges build a vocab; token boundaries on arbitrary text; compare tokenizers                        | ⚪     |
+| 5   | Tiny diffusion model          | forward noising / reverse denoising on 2D distributions and small images, step by step                        | ⚪     |
 
 ### Backlog
 
@@ -46,7 +50,8 @@ Priority order. Status: 🟢 done · 🟡 in progress · ⚪ planned.
 
 ```
 demos/
-  transformer-attention/   # demo 1 — self-attention
+  transformer-attention/   # demo 1 — self-attention (live)
+training/                  # PyTorch training + export for demo 1's model
 docs/
   ROADMAP.md               # the list above, with detail
 ```

@@ -13,8 +13,9 @@ import { candidateIds, loadModelFromUrl, mulberry32, sampleFromLogits, softmax }
 import type { GPTModel } from './inference/model';
 import type { ForwardTrace } from './inference/types';
 import { createStore } from './store';
-import { attentionMatrix, type HeadSelection } from './views/attentionData';
+import { attentionMatrix, scoreMatrix, type HeadSelection } from './views/attentionData';
 import { createArcDiagram } from './views/arcDiagram';
+import { createComputeSteps } from './views/computeSteps';
 import { createControls } from './views/controls';
 import { createGenControls } from './views/genControls';
 import { createHeatmap } from './views/heatmap';
@@ -104,9 +105,10 @@ export async function mountApp(root: HTMLElement): Promise<void> {
   const rightCol = document.createElement('div');
   rightCol.className = 'rightcol';
   const probHost = document.createElement('div');
+  const computeHost = document.createElement('div');
   const caption = document.createElement('p');
   caption.className = 'caption';
-  rightCol.append(probHost, caption);
+  rightCol.append(probHost, computeHost, caption);
   lower.append(heatHost, rightCol);
   stage.append(arcHost, lower);
   root.replaceChildren(controls.el, gen.el, stage);
@@ -114,6 +116,7 @@ export async function mountApp(root: HTMLElement): Promise<void> {
   const arc = createArcDiagram(arcHost, (i) => store.set({ focus: i }));
   const heat = createHeatmap(heatHost, (i) => store.set({ focus: i }));
   const bars = createProbBars(probHost);
+  const compute = createComputeSteps(computeHost);
 
   let timer = 0;
   function scheduleApply(text: string): void {
@@ -217,6 +220,13 @@ export async function mountApp(root: HTMLElement): Promise<void> {
 
     const active = s.focus ?? s.chars.length - 1;
     const headText = s.head === 'mean' ? 'averaged over all heads' : `head ${s.head + 1}`;
+    compute.render(
+      s.chars,
+      scoreMatrix(s.trace, layer, s.head),
+      matrix,
+      active,
+      `layer ${layer + 1}, ${headText}`,
+    );
     const genCount = s.chars.length - s.promptLen;
     caption.textContent =
       `Layer ${layer + 1} of ${s.trace.nLayer}, ${headText}. ` +

@@ -3,6 +3,7 @@ import type { ForwardTrace } from '../inference/types';
 import { attentionMatrix, maxWeight } from './attentionData';
 import { accent, arcPath, clamp, emphasize } from './geometry';
 import { glyph } from './glyph';
+import { topProbabilities } from './probBars';
 
 function trace(): ForwardTrace {
   return {
@@ -95,5 +96,18 @@ describe('maxWeight / glyph', () => {
     expect(glyph(' ')).toBe('␣');
     expect(glyph('\n')).toBe('⏎');
     expect(glyph('x')).toBe('x');
+  });
+});
+
+describe('topProbabilities', () => {
+  it('returns the k largest, highest first, with ids', () => {
+    const top = topProbabilities([0.1, 0.5, 0.2, 0.05, 0.15], 3);
+    expect(top.map((t) => t.id)).toEqual([1, 2, 4]);
+    expect(top[0]!.p).toBeCloseTo(0.5);
+  });
+
+  it('clamps k to the available length and to zero', () => {
+    expect(topProbabilities([0.4, 0.6], 10)).toHaveLength(2);
+    expect(topProbabilities([0.4, 0.6], -1)).toHaveLength(0);
   });
 });

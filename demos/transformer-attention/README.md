@@ -43,5 +43,6 @@ npm test --workspace @ai-visualized/transformer-attention
 - [x] Trained model + int8 export
 - [x] From-scratch inference engine + parity test
 - [x] Attention arc diagram + heatmap, layer/head selection
-- [ ] Token-by-token generation with next-token probability bars
+- [x] Token-by-token generation with next-character probability bars and
+      temperature / top-k / top-p controls
 - [ ] Step-through of the forward pass; deploy to GitHub Pages

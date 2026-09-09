@@ -21,6 +21,27 @@ export interface SampleResult {
 }
 
 /**
+ * The token ids that survive top-k then top-p filtering of `probs`
+ * (highest probability first). This is exactly the set the sampler draws from,
+ * exposed so the UI can grey out the candidates that were cut.
+ */
+export function candidateIds(probs: number[], topK: number, topP: number): number[] {
+  let order = [...probs.keys()].sort((a, b) => probs[b]! - probs[a]!);
+  if (topK > 0) order = order.slice(0, topK);
+  if (topP < 1) {
+    const kept: number[] = [];
+    let cum = 0;
+    for (const i of order) {
+      kept.push(i);
+      cum += probs[i]!;
+      if (cum >= topP) break;
+    }
+    order = kept;
+  }
+  return order;
+}
+
+/**
  * Sample a token id from logits.
  *
  * 1. divide logits by `temperature` (lower = sharper, 0 = greedy argmax)
@@ -42,19 +63,7 @@ export function sampleFromLogits(
   }
 
   const probs = softmax(logits.map((x) => x / temperature));
-
-  let order = [...probs.keys()].sort((a, b) => probs[b]! - probs[a]!);
-  if (topK > 0) order = order.slice(0, topK);
-  if (topP < 1) {
-    const kept: number[] = [];
-    let cum = 0;
-    for (const i of order) {
-      kept.push(i);
-      cum += probs[i]!;
-      if (cum >= topP) break;
-    }
-    order = kept;
-  }
+  const order = candidateIds(probs, topK, topP);
 
   let mass = 0;
   for (const i of order) mass += probs[i]!;

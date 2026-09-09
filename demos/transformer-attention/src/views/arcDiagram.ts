@@ -11,13 +11,18 @@ import { glyph } from './glyph';
 
 const SVG = 'http://www.w3.org/2000/svg';
 const CELL = 24; // px per character
-const HEIGHT = 116;
-const BASE_Y = 80; // baseline for the characters
-const ARC_LIFT = 66; // tallest arc
-const BAR_MAX = 24; // tallest weight bar
+const HEIGHT = 104;
+const BASE_Y = 70; // baseline for the characters
+const ARC_LIFT = 58; // tallest arc
+const BAR_MAX = 22; // tallest weight bar
+
+export interface ArcRenderOptions {
+  /** Characters at index >= promptLen were produced by the model, and are tinted. */
+  promptLen?: number;
+}
 
 export interface ArcDiagram {
-  render(chars: string[], matrix: number[][], focus: number | null): void;
+  render(chars: string[], matrix: number[][], focus: number | null, opts?: ArcRenderOptions): void;
 }
 
 export function createArcDiagram(
@@ -32,8 +37,14 @@ export function createArcDiagram(
 
   svg.addEventListener('mouseleave', () => onFocus(null));
 
-  function render(chars: string[], matrix: number[][], focus: number | null): void {
+  function render(
+    chars: string[],
+    matrix: number[][],
+    focus: number | null,
+    opts: ArcRenderOptions = {},
+  ): void {
     const n = chars.length;
+    const promptLen = opts.promptLen ?? n;
     const width = Math.max(n * CELL, 1);
     svg.setAttribute('width', String(width));
     svg.setAttribute('viewBox', `0 0 ${width} ${HEIGHT}`);
@@ -88,7 +99,10 @@ export function createArcDiagram(
       label.setAttribute('x', String(x + CELL / 2));
       label.setAttribute('y', String(BASE_Y - 8));
       label.setAttribute('text-anchor', 'middle');
-      label.setAttribute('class', 'arc-char' + (i === active ? ' is-active' : ''));
+      const cls = ['arc-char'];
+      if (i === active) cls.push('is-active');
+      if (i >= promptLen) cls.push('is-generated');
+      label.setAttribute('class', cls.join(' '));
       label.textContent = glyph(chars[i]!);
       frag.appendChild(label);
 

@@ -43,6 +43,13 @@
             attention patterns you are looking at. Different heads specialise — some track the
             previous character, some jump to punctuation or the start of a word.
           </li>
+          <li>
+            <strong>Generate</strong> extends the text one character at a time. The
+            <strong>Next character</strong> bars are the model's probability for each possible next
+            character; <strong>temperature</strong>, <strong>top-k</strong> and
+            <strong>top-p</strong> reshape that distribution before one character is drawn from it.
+            Generated characters are tinted, and the attention updates as the text grows.
+          </li>
         </ol>
       </section>
     </main>

@@ -15,28 +15,14 @@ Q·Kᵀ, scale it, softmax it, and read every intermediate value back out. Each
 demo therefore doubles as a readable reference implementation, with a short
 write-up of the math and the design trade-offs.
 
-## Live
+## Demos
 
-- **Self-attention visualizer** → <https://josemcortes.github.io/ai-visualized/>
+| Demo                          |                                                                                                                               |                                                                                                                         |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| **Self-attention visualizer** | a 0.8M-parameter char-level GPT running in-browser, its attention drawn as arcs and a heatmap, with token-by-token generation | [live](https://josemcortes.github.io/ai-visualized/) · [`demos/transformer-attention/`](./demos/transformer-attention/) |
 
-## Roadmap
-
-Priority order. Status: 🟢 done · 🟡 in progress · ⚪ planned.
-
-| #   | Demo                          | Theme                                                                                                         | Status |
-| --- | ----------------------------- | ------------------------------------------------------------------------------------------------------------- | ------ |
-| 1   | **Self-attention visualizer** | tokens → Q/K/V → attention weights per head; tiny char-level GPT in-browser, generation with probability bars | 🟢     |
-| 2   | Autograd / backprop engine    | micrograd-style scalar autograd, live computation graph, forward values + backward gradients                  | ⚪     |
-| 3   | MLP training playground       | decision boundary evolving during training on spirals/moons; neurons, weights, activations                    | ⚪     |
-| 4   | Tokenizer / BPE explorer      | watch BPE merges build a vocab; token boundaries on arbitrary text; compare tokenizers                        | ⚪     |
-| 5   | Tiny diffusion model          | forward noising / reverse denoising on 2D distributions and small images, step by step                        | ⚪     |
-
-### Backlog
-
-- **Modern AI / LLM:** embeddings + mini RAG (2D projection, cosine similarity, chunk→embed→retrieve→prompt); decoding strategies (greedy / temperature / top-k / top-p / beam).
-- **NN fundamentals:** CNN feature maps (draw a digit → filters → feature maps → pooling → classify, plus saliency); gradient descent & optimizers (loss landscape, SGD vs Momentum vs RMSProp vs Adam).
-- **Classic ML:** k-means / DBSCAN; decision trees → random forest; k-NN / SVM (kernel trick); PCA.
-- **RL / agents:** Q-learning on gridworld (value heatmap updating); ReAct agent trace; multi-armed bandits.
+More are planned (autograd, an MLP playground, a tokenizer explorer, a tiny
+diffusion model, some classic ML) — added here as they land.
 
 ## Stack
 
@@ -50,10 +36,8 @@ Priority order. Status: 🟢 done · 🟡 in progress · ⚪ planned.
 
 ```
 demos/
-  transformer-attention/   # demo 1 — self-attention (live)
-training/                  # PyTorch training + export for demo 1's model
-docs/
-  ROADMAP.md               # the list above, with detail
+  transformer-attention/   # self-attention visualizer (live)
+training/                  # PyTorch training + export for its model
 ```
 
 Each demo is an npm workspace under `demos/`.

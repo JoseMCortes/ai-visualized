@@ -11,3 +11,6 @@ demos/embeddings/public/embeddings.json
 # Regenerable training / source data.
 training/data
 demos/embeddings/data/glove.6B.50d.txt
+
+# Bundled source texts (Project Gutenberg, public domain).
+demos/word2vec/public/texts

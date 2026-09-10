@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word2Vec on Real Text</title>
+    <meta
+      name="description"
+      content="Pick a book, and watch skip-gram train a word embedding on it — the frequent words drift into groups by the company they keep."
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Word2Vec, on Real Text</h1>
+        <p class="sub">
+          Pick a book. The demo pulls out its most frequent content words, starts each as a random
+          point, and runs skip-gram — nudging words that appear near each other together, pushing
+          random pairs apart. Press Play and watch the words drift into groups by the company they
+          keep. Click any word to see its nearest neighbours.
+        </p>
+        <p class="disclaimer">
+          Same algorithm as the <a href="../skipgram/">step-by-step demo</a>, on a real corpus. The
+          vectors are 16-dimensional (2-D collapses on real text); the map is a PCA view of them,
+          rotated to stay steady, and coloured by cluster. A single book is tiny next to what real
+          word2vec trains on, so expect suggestive groupings, not perfect ones.
+        </p>
+      </header>
+
+      <section id="app"></section>
+
+      <section class="howto">
+        <h2>How to read this</h2>
+        <ol>
+          <li>
+            <strong>The words</strong> — the most frequent non-stop-words in the text (list on the
+            right, with counts). Stop-words like "the" and "and" are dropped; very common words are
+            thinned so they don't dominate.
+          </li>
+          <li>
+            <strong>Each step</strong> takes one (word, nearby word) pair from the text and nudges
+            their vectors together, and a few random words apart. The readout names the current
+            pair.
+          </li>
+          <li>
+            <strong>The map</strong> is a flattened view of the 16-D vectors. As training proceeds,
+            words that share context pull together; k-means colours the emerging clusters.
+          </li>
+          <li>
+            <strong>Click a word</strong> to pin it and see its nearest neighbours by cosine
+            similarity — that's the actual output of a word embedding.
+          </li>
+        </ol>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

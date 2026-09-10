@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Training a Word Embedding, Step by Step</title>
+    <meta
+      name="description"
+      content="Watch a word embedding form: every word starts as a random dot, and one nudge at a time skip-gram pulls words that share context together."
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Training a Word Embedding, Step by Step</h1>
+        <p class="sub">
+          Every word starts as a random dot. The algorithm walks through a tiny corpus and, one tiny
+          nudge at a time, pulls words that appear together closer and pushes unrelated words apart.
+          After a few hundred nudges the words sort themselves into groups. Step through it, or
+          press Play.
+        </p>
+        <p class="disclaimer">
+          This is <strong>skip-gram with negative sampling</strong> — the core of word2vec — but
+          shrunk for clarity: a ~30-word corpus and <strong>2-dimensional</strong> vectors so the
+          map <em>is</em> the model. Real embeddings use billions of words and hundreds of
+          dimensions; the arrows on the map are exaggerated so a nudge is visible.
+        </p>
+      </header>
+
+      <section id="app"></section>
+
+      <section class="howto">
+        <h2>How to read this</h2>
+        <ol>
+          <li>
+            <strong>1 — pick a pair.</strong> A center word and one of its real neighbours in the
+            text (highlighted in the corpus below).
+          </li>
+          <li>
+            <strong>2 — score it.</strong> Take the dot product of the two vectors, squash it to a
+            0–1 value with <code>sigmoid</code>. For the real neighbour we want 1; for a few random
+            "negative" words we want 0. The gap is the error.
+          </li>
+          <li>
+            <strong>3 — nudge.</strong> Move each vector a little to shrink its error:
+            <code>−(learning rate) × error × (the other vector)</code>. The real neighbour gets
+            pulled toward the center (green); the negatives get pushed away (red).
+          </li>
+          <li>
+            Repeat for thousands of pairs. No one defines "animal" or "food" — the groups appear
+            because those words keep the same company.
+          </li>
+        </ol>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -19,10 +19,11 @@ write-up of the math and the design trade-offs.
 
 **Live: <https://josemcortes.github.io/ai-visualized/>**
 
-| Demo                            |                                                                                                                               |                                                                                                                                     |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **Self-Attention, Visualized**  | a 0.8M-parameter char-level GPT running in-browser, its attention drawn as arcs and a heatmap, with token-by-token generation | [live](https://josemcortes.github.io/ai-visualized/transformer/) · [`demos/transformer-attention/`](./demos/transformer-attention/) |
-| **Word Embeddings, Visualized** | words as vectors — nearby means similar, directions carry meaning; a hand-built toy plus ~250 real GloVe vectors              | [live](https://josemcortes.github.io/ai-visualized/embeddings/) · [`demos/embeddings/`](./demos/embeddings/)                        |
+| Demo                                        |                                                                                                                               |                                                                                                                                     |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Self-Attention, Visualized**              | a 0.8M-parameter char-level GPT running in-browser, its attention drawn as arcs and a heatmap, with token-by-token generation | [live](https://josemcortes.github.io/ai-visualized/transformer/) · [`demos/transformer-attention/`](./demos/transformer-attention/) |
+| **Word Embeddings, Visualized**             | words as vectors — nearby means similar, directions carry meaning; a hand-built toy plus ~250 real GloVe vectors              | [live](https://josemcortes.github.io/ai-visualized/embeddings/) · [`demos/embeddings/`](./demos/embeddings/)                        |
+| **Training a Word Embedding, Step by Step** | skip-gram forming an embedding one inspectable nudge at a time — pull the words that share context together                   | [live](https://josemcortes.github.io/ai-visualized/skipgram/) · [`demos/skipgram/`](./demos/skipgram/)                              |
 
 More are planned (autograd, an MLP playground, a tokenizer explorer, a tiny
 diffusion model, some classic ML) — added here as they land.
@@ -41,6 +42,7 @@ diffusion model, some classic ML) — added here as they land.
 demos/
   transformer-attention/   # self-attention visualizer
   embeddings/              # word embeddings visualizer
+  skipgram/                # embedding-training visualizer
 training/                  # PyTorch training + export for the GPT
 landing/                   # the gallery page for the deployed site
 ```

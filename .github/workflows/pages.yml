@@ -4,6 +4,7 @@ name: Deploy demos to Pages
 #   /ai-visualized/              landing/index.html
 #   /ai-visualized/transformer/  demos/transformer-attention
 #   /ai-visualized/embeddings/   demos/embeddings
+#   /ai-visualized/skipgram/     demos/skipgram
 
 on:
   push:
@@ -40,12 +41,18 @@ jobs:
         env:
           VITE_BASE: /ai-visualized/embeddings/
 
+      - name: Build skip-gram demo
+        run: npm run build --workspace @ai-visualized/skipgram
+        env:
+          VITE_BASE: /ai-visualized/skipgram/
+
       - name: Assemble site
         run: |
-          mkdir -p site/transformer site/embeddings
+          mkdir -p site/transformer site/embeddings site/skipgram
           cp landing/index.html site/index.html
           cp -r demos/transformer-attention/dist/* site/transformer/
           cp -r demos/embeddings/dist/* site/embeddings/
+          cp -r demos/skipgram/dist/* site/skipgram/
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

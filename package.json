@@ -15,7 +15,8 @@
     "lint": "prettier --check .",
     "format": "prettier --write .",
     "dev:transformer": "npm run dev --workspace @ai-visualized/transformer-attention",
-    "dev:embeddings": "npm run dev --workspace @ai-visualized/embeddings"
+    "dev:embeddings": "npm run dev --workspace @ai-visualized/embeddings",
+    "dev:skipgram": "npm run dev --workspace @ai-visualized/skipgram"
   },
   "devDependencies": {
     "prettier": "^3.3.3",

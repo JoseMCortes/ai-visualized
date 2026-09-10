@@ -33,18 +33,25 @@
         <h2>How to read this</h2>
         <ol>
           <li>
+            <strong>A word is just two numbers</strong> — its position on the map. That pair of
+            numbers is the entire "vector" for the word; training only ever changes these numbers.
+          </li>
+          <li>
             <strong>1 — pick a pair.</strong> A center word and one of its real neighbours in the
             text (highlighted in the corpus below).
           </li>
           <li>
-            <strong>2 — score it.</strong> Take the dot product of the two vectors, squash it to a
-            0–1 value with <code>sigmoid</code>. For the real neighbour we want 1; for a few random
-            "negative" words we want 0. The gap is the error.
+            <strong>2 — score it.</strong> Multiply the two words' numbers pairwise and add them up
+            (the <em>dot product</em>), then squash that to a 0–1 value with <code>sigmoid</code>.
+            For the real neighbour we want 1; for a few random "negative" words we want 0. The gap
+            is the error.
           </li>
           <li>
-            <strong>3 — nudge.</strong> Move each vector a little to shrink its error:
-            <code>−(learning rate) × error × (the other vector)</code>. The real neighbour gets
-            pulled toward the center (green); the negatives get pushed away (red).
+            <strong>3 — nudge.</strong> Adjust both numbers of each word a little to shrink that
+            error: <code>−(learning rate) × error × (the other word's numbers)</code>. For the real
+            neighbour this makes the two vectors <em>point more the same way</em> (dot product up),
+            which usually pulls the dots closer — green. For the negatives it does the opposite —
+            red.
           </li>
           <li>
             Repeat for thousands of pairs. No one defines "animal" or "food" — the groups appear

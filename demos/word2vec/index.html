@@ -38,13 +38,16 @@
             thinned so they don't dominate.
           </li>
           <li>
-            <strong>Each step</strong> takes one (word, nearby word) pair from the text and nudges
-            their vectors together, and a few random words apart. The readout names the current
-            pair.
+            <strong>Each word is 16 numbers</strong>, not 2. When two words appear near each other,
+            all 16 of each word's numbers get nudged a little so the two lists
+            <em>line up better</em> (their dot product grows); a few random words get nudged to line
+            up <em>less</em>. Same rule as the <a href="../skipgram/">step-by-step demo</a>, just
+            with 16 numbers instead of 2.
           </li>
           <li>
-            <strong>The map</strong> is a flattened view of the 16-D vectors. As training proceeds,
-            words that share context pull together; k-means colours the emerging clusters.
+            <strong>The map</strong> is a flat 2-D shadow of those 16 numbers (PCA), so two dots
+            sliding together on screen is really their 16-number vectors becoming more aligned.
+            k-means colours the emerging clusters.
           </li>
           <li>
             <strong>Click a word</strong> to pin it and see its nearest neighbours by cosine

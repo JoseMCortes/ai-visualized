@@ -6,6 +6,7 @@ name: Deploy demos to Pages
 #   /ai-visualized/embeddings/   demos/embeddings
 #   /ai-visualized/skipgram/     demos/skipgram
 #   /ai-visualized/word2vec/     demos/word2vec
+#   /ai-visualized/prompt-injection/  demos/prompt-injection
 
 on:
   push:
@@ -52,14 +53,20 @@ jobs:
         env:
           VITE_BASE: /ai-visualized/word2vec/
 
+      - name: Build prompt-injection demo
+        run: npm run build --workspace @ai-visualized/prompt-injection
+        env:
+          VITE_BASE: /ai-visualized/prompt-injection/
+
       - name: Assemble site
         run: |
-          mkdir -p site/transformer site/embeddings site/skipgram site/word2vec
+          mkdir -p site/transformer site/embeddings site/skipgram site/word2vec site/prompt-injection
           cp landing/index.html site/index.html
           cp -r demos/transformer-attention/dist/* site/transformer/
           cp -r demos/embeddings/dist/* site/embeddings/
           cp -r demos/skipgram/dist/* site/skipgram/
           cp -r demos/word2vec/dist/* site/word2vec/
+          cp -r demos/prompt-injection/dist/* site/prompt-injection/
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

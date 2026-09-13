@@ -17,7 +17,8 @@
     "dev:transformer": "npm run dev --workspace @ai-visualized/transformer-attention",
     "dev:embeddings": "npm run dev --workspace @ai-visualized/embeddings",
     "dev:skipgram": "npm run dev --workspace @ai-visualized/skipgram",
-    "dev:word2vec": "npm run dev --workspace @ai-visualized/word2vec"
+    "dev:word2vec": "npm run dev --workspace @ai-visualized/word2vec",
+    "dev:prompt-injection": "npm run dev --workspace @ai-visualized/prompt-injection"
   },
   "devDependencies": {
     "prettier": "^3.3.3",

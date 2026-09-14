@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ranking Documents for RAG</title>
+    <meta
+      name="description"
+      content="Six document-ranking methods, from TF-IDF to learning to rank, compared on the same small document set and query — every score computed from scratch and broken down step by step."
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Ranking Documents for RAG</h1>
+        <p class="sub">
+          When an AI app answers from your documents, step one is finding the right ones — that's a
+          ranking problem, and there is more than one way to solve it. Below: the same 18 short
+          documents and the same handful of queries, ranked six different ways. Pick a method, pick
+          a query, and watch a document's score get built up piece by piece.
+        </p>
+        <p class="disclaimer">
+          Every method here is implemented from scratch — no external search index and no real
+          language model. The two "trained" methods (cross-encoder, learning to rank) learn from
+          just four hand-labelled example queries, which is enough to show the mechanism but far too
+          little to generalize the way a production system — trained on thousands of examples —
+          would.
+        </p>
+      </header>
+
+      <section id="app"></section>
+
+      <section class="howto">
+        <h2>How to read this</h2>
+        <ol>
+          <li>
+            <strong>The document list</strong> (left) always shows the same 18 documents, re-ranked
+            by whichever method is selected. The dots on the right of each row are this demo's own
+            answer key — how relevant that document actually is to the query — so you can see how
+            closely a method's ordering matches it.
+          </li>
+          <li>
+            <strong>Click any document</strong> to see exactly how its score was computed, on the
+            right. For TF-IDF and BM25, press <strong>Play</strong> to watch the score build up one
+            query word at a time.
+          </li>
+          <li>
+            <strong>TF-IDF → BM25 → embeddings → hybrid</strong> is a natural progression: word
+            counting, a more careful version of word counting, meaning instead of exact words, then
+            a blend of both.
+          </li>
+          <li>
+            <strong>Cross-encoder and learning to rank</strong> start untrained — every score is 0
+            until you press <strong>Step</strong>, <strong>Play</strong>, or <strong>Run</strong> to
+            train them on this demo's four labelled example queries, live, from scratch.
+          </li>
+        </ol>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

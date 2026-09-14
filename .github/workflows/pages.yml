@@ -7,6 +7,7 @@ name: Deploy demos to Pages
 #   /ai-visualized/skipgram/     demos/skipgram
 #   /ai-visualized/word2vec/     demos/word2vec
 #   /ai-visualized/prompt-injection/  demos/prompt-injection
+#   /ai-visualized/rag-ranking/  demos/rag-ranking
 
 on:
   push:
@@ -58,15 +59,21 @@ jobs:
         env:
           VITE_BASE: /ai-visualized/prompt-injection/
 
+      - name: Build rag-ranking demo
+        run: npm run build --workspace @ai-visualized/rag-ranking
+        env:
+          VITE_BASE: /ai-visualized/rag-ranking/
+
       - name: Assemble site
         run: |
-          mkdir -p site/transformer site/embeddings site/skipgram site/word2vec site/prompt-injection
+          mkdir -p site/transformer site/embeddings site/skipgram site/word2vec site/prompt-injection site/rag-ranking
           cp landing/index.html site/index.html
           cp -r demos/transformer-attention/dist/* site/transformer/
           cp -r demos/embeddings/dist/* site/embeddings/
           cp -r demos/skipgram/dist/* site/skipgram/
           cp -r demos/word2vec/dist/* site/word2vec/
           cp -r demos/prompt-injection/dist/* site/prompt-injection/
+          cp -r demos/rag-ranking/dist/* site/rag-ranking/
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

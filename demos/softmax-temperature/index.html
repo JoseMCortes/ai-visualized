@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Softmax with Temperature</title>
+    <meta
+      name="description"
+      content="Drag a temperature dial and watch a softmax probability vector reshape itself live — from near one-hot to nearly uniform — with the full arithmetic and a probability-vs-temperature chart for every entry."
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Softmax with Temperature</h1>
+        <p class="sub">
+          Softmax turns a list of raw scores into a probability distribution. The temperature
+          <strong>T</strong> is a single dial that controls how sharp or flat that distribution is —
+          drag it and watch every number update live, top to bottom.
+        </p>
+        <p class="disclaimer">
+          This computes real softmax from scratch — no model, no API. The "real embeddings" preset
+          reuses genuine <a href="../embeddings/">GloVe vectors</a> from this portfolio's Word
+          Embeddings demo; the rest are hand-picked scores chosen to make a specific pattern (a
+          clear winner, a close call, several plausible options) easy to see.
+        </p>
+      </header>
+
+      <section id="app"></section>
+
+      <section class="howto">
+        <h2>How to read this</h2>
+        <ol>
+          <li>
+            <strong>The formula.</strong> For each score <code>x</code>:
+            <code>probability = e^(x / T) / Σ e^(x / T)</code>. Dividing by T first stretches or
+            shrinks the gaps between scores; exponentiating then turns bigger gaps into
+            disproportionately bigger probabilities.
+          </li>
+          <li>
+            <strong>T = 1</strong> is plain softmax — no stretching. That's the natural starting
+            point (the Reset button returns here).
+          </li>
+          <li>
+            <strong>T &lt; 1 sharpens.</strong> Dividing by a small number stretches the gaps
+            between scores, so the exponential exaggerates the leader. As T → 0, the winner takes
+            essentially all the probability — softmax becomes "always pick the top score".
+          </li>
+          <li>
+            <strong>T &gt; 1 softens.</strong> Dividing by a large number shrinks every score toward
+            0, so <code>e^0 = 1</code> for all of them — the distribution flattens toward uniform,
+            and the original ranking matters less and less.
+          </li>
+          <li>
+            <strong>Entropy</strong> is the single number for "how spread out is this distribution"
+            — 0 means one option has all the probability, <code>ln(N)</code> means all N options are
+            equally likely. Watch it slide as you move T.
+          </li>
+          <li>
+            <strong>The chart</strong> plots every entry's probability across the full temperature
+            range at once. The ranking never changes — softmax can't reorder entries, so lines never
+            cross — but watch how fast the gaps between lines open and close: near T = 0.05 they fan
+            out to 0% or 100%, and above T ≈ 10 they all collapse toward the same flat line.
+          </li>
+        </ol>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

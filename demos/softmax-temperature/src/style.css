@@ -30,7 +30,7 @@ body {
 }
 
 main {
-  max-width: 1000px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 2rem 1.25rem 4rem;
 }
@@ -245,10 +245,16 @@ section {
   margin-top: 0.6rem;
 }
 
-/* --- stage grid: formula table + entropy meter --- */
-.stage-grid {
+/* --- results grid: live breakdown (left) beside the probability-vs-T chart (right) --- */
+.results-grid {
   display: grid;
   grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.results-left {
+  display: grid;
   gap: 1rem;
 }
 
@@ -430,7 +436,7 @@ section {
 
 /* --- probability curve chart --- */
 .chart-title {
-  margin: 1.4rem 0 0.2rem;
+  margin: 0 0 0.2rem;
   font-size: 1.05rem;
 }
 
@@ -596,10 +602,9 @@ section {
   margin-bottom: 0;
 }
 
-@media (min-width: 720px) {
-  .stage-grid {
-    grid-template-columns: 1.4fr 1fr;
-    align-items: start;
+@media (min-width: 980px) {
+  .results-grid {
+    grid-template-columns: minmax(380px, 460px) 1fr;
   }
 }
 

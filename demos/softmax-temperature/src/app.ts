@@ -20,11 +20,22 @@ const PLAY_PERIOD_MS = 9000; // one full low->high->low sweep
 export function mountApp(root: HTMLElement): void {
   const editorHost = document.createElement('div');
   const sliderHost = document.createElement('div');
+
+  // Results grid: the live breakdown (left) sits beside the probability-vs-T
+  // chart (right) so both are visible together — no scrolling back and
+  // forth between "what T does right now" and "what T does across the
+  // whole range".
   const grid = document.createElement('div');
-  grid.className = 'stage-grid';
+  grid.className = 'results-grid';
+
+  const leftCol = document.createElement('div');
+  leftCol.className = 'results-left';
   const tableHost = document.createElement('div');
   const entropyHost = document.createElement('div');
-  const chartWrap = document.createElement('div');
+  leftCol.append(tableHost, entropyHost);
+
+  const rightCol = document.createElement('div');
+  rightCol.className = 'results-right';
   const chartTitle = document.createElement('h2');
   chartTitle.className = 'chart-title';
   chartTitle.textContent = 'Probability vs. temperature, for every entry';
@@ -33,10 +44,10 @@ export function mountApp(root: HTMLElement): void {
   chartSub.textContent =
     'Each line is one vector entry, tracked across every T from 0.05 to 20. The dashed marker is the T you have selected above.';
   const chartHost = document.createElement('div');
-  chartWrap.append(chartTitle, chartSub, chartHost);
+  rightCol.append(chartTitle, chartSub, chartHost);
 
-  grid.append(tableHost, entropyHost);
-  root.replaceChildren(editorHost, sliderHost, grid, chartWrap);
+  grid.append(leftCol, rightCol);
+  root.replaceChildren(editorHost, sliderHost, grid);
 
   const formulaTable = createFormulaTable();
   tableHost.appendChild(formulaTable.el);

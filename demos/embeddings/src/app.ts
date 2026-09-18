@@ -33,16 +33,16 @@ const GROUP: Record<string, string> = {
 };
 
 const GROUP_COLOR: Record<string, string> = {
-  people: '#818cf8',
-  place: '#2dd4bf',
-  animal: '#fbbf24',
-  number: '#f472b6',
-  color: '#22d3ee',
-  food: '#a78bfa',
-  verb: '#fb923c',
-  nature: '#a3e635',
-  body: '#f87171',
-  thing: '#94a3b8',
+  people: '#4f46e5',
+  place: '#0d9488',
+  animal: '#d97706',
+  number: '#db2777',
+  color: '#0891b2',
+  food: '#7c3aed',
+  verb: '#ea580c',
+  nature: '#65a30d',
+  body: '#dc2626',
+  thing: '#475569',
 };
 
 const colorFor = (category: string): string => GROUP_COLOR[GROUP[category] ?? 'thing']!;

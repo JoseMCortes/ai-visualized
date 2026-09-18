@@ -15,7 +15,7 @@ export function emphasize(weight: number, gamma = 0.65): number {
 
 /** Accent colour at a given opacity — the one hue both views use. */
 export function accent(alpha: number): string {
-  return `rgba(129, 140, 248, ${alpha.toFixed(3)})`;
+  return `rgba(79, 70, 229, ${alpha.toFixed(3)})`;
 }
 
 export function clamp(x: number, lo: number, hi: number): number {

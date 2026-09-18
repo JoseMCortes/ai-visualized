@@ -79,7 +79,7 @@ describe('geometry', () => {
   });
 
   it('accent emits an rgba string', () => {
-    expect(accent(0.5)).toMatch(/^rgba\(129, 140, 248, 0\.500\)$/);
+    expect(accent(0.5)).toMatch(/^rgba\(79, 70, 229, 0\.500\)$/);
   });
 
   it('arcPath is a quadratic Bézier between the two x positions', () => {

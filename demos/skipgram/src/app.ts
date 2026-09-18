@@ -22,10 +22,10 @@ setTopic('food', 'eat bread cheese drink wine milk bake from');
 setTopic('court', 'king queen wears crown sits throne rules castle lives prince becomes');
 
 const TOPIC_COLOR: Record<string, string> = {
-  animal: '#fbbf24',
-  food: '#a78bfa',
-  court: '#818cf8',
-  other: '#94a3b8',
+  animal: '#d97706',
+  food: '#7c3aed',
+  court: '#4f46e5',
+  other: '#475569',
 };
 const colorFor = (word: string): string => TOPIC_COLOR[TOPIC[word] ?? 'other']!;
 

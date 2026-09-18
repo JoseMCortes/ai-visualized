@@ -20,7 +20,7 @@ const SOURCES = [
   { id: 'sherlock', label: 'Sherlock Holmes' },
 ];
 
-const CLUSTER_COLORS = ['#818cf8', '#fbbf24', '#4ade80', '#f472b6', '#22d3ee', '#f87171'];
+const CLUSTER_COLORS = ['#4f46e5', '#d97706', '#16a34a', '#db2777', '#0891b2', '#dc2626'];
 const K = 4;
 
 const DEFAULTS = {

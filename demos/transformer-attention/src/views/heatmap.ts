@@ -63,7 +63,7 @@ export function createHeatmap(host: HTMLElement, onFocus: (index: number | null)
 
     // focused query row: outline + faint dimming of the rest
     if (active >= 0 && active < count) {
-      ctx.fillStyle = 'rgba(11, 11, 15, 0.55)';
+      ctx.fillStyle = 'rgba(240, 240, 236, 0.72)';
       ctx.fillRect(PAD, PAD, cell * count, cell * active);
       ctx.fillRect(PAD, PAD + cell * (active + 1), cell * count, cell * (count - active - 1));
       ctx.strokeStyle = accent(0.9);
@@ -72,7 +72,7 @@ export function createHeatmap(host: HTMLElement, onFocus: (index: number | null)
     }
 
     if (showLabels) {
-      ctx.fillStyle = '#8b8b99';
+      ctx.fillStyle = '#63636b';
       // key characters along the top, rotated so they never collide
       ctx.textAlign = 'left';
       for (let j = 0; j < count; j++) {
@@ -85,7 +85,7 @@ export function createHeatmap(host: HTMLElement, onFocus: (index: number | null)
       // query characters down the left
       ctx.textAlign = 'right';
       for (let i = 0; i < count; i++) {
-        ctx.fillStyle = i === active ? '#e8e8ec' : '#8b8b99';
+        ctx.fillStyle = i === active ? '#16161a' : '#63636b';
         ctx.fillText(glyph(chars[i]!), PAD - 6, PAD + i * cell + cell / 2);
       }
     }

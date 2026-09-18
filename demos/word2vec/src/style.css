@@ -1,14 +1,14 @@
 :root {
-  --bg: #0b0b0f;
-  --panel: #14141b;
-  --panel-2: #1b1b24;
-  --line: #2a2a33;
-  --ink: #e8e8ec;
-  --ink-dim: #9a9aa7;
-  --accent: #818cf8;
-  --pull: #4ade80;
-  --push: #f87171;
-  color-scheme: dark;
+  --bg: #f6f6f4;
+  --panel: #ffffff;
+  --panel-2: #f0f0ec;
+  --line: #e0e0da;
+  --ink: #16161a;
+  --ink-dim: #63636b;
+  --accent: #4f46e5;
+  --pull: #16a34a;
+  --push: #dc2626;
+  color-scheme: light;
 }
 
 * {
@@ -100,7 +100,7 @@ a {
 }
 
 .btn:hover:not(:disabled) {
-  border-color: #3a3a46;
+  border-color: #c7c7c0;
 }
 
 .btn:disabled {
@@ -110,7 +110,7 @@ a {
 
 .btn-primary {
   color: #fff;
-  background: color-mix(in srgb, var(--accent) 42%, var(--panel-2));
+  background: var(--accent);
   border-color: var(--accent);
 }
 
@@ -132,7 +132,7 @@ a {
 
 .seg button.is-on {
   color: #fff;
-  background: color-mix(in srgb, var(--accent) 30%, var(--panel-2));
+  background: var(--accent);
   border-color: var(--accent);
 }
 
@@ -224,12 +224,12 @@ a {
   font:
     10px ui-monospace,
     monospace;
-  fill: #71717f;
+  fill: var(--ink-dim);
   pointer-events: none;
 }
 
 .word.is-focus text {
-  fill: #fff;
+  fill: var(--ink);
   font-weight: 600;
 }
 
@@ -238,7 +238,7 @@ a {
 }
 
 .word.is-focus circle {
-  stroke: #fff;
+  stroke: var(--ink);
   stroke-width: 2;
 }
 
@@ -315,7 +315,7 @@ a {
 }
 
 .readout .dim {
-  color: #6b6b78;
+  color: var(--ink-dim);
 }
 
 /* --- word list --- */
@@ -352,12 +352,12 @@ a {
 }
 
 .wl-row.is-on {
-  background: color-mix(in srgb, var(--accent) 24%, var(--panel-2));
+  background: var(--accent);
   color: #fff;
 }
 
 .wl-count {
-  color: #6b6b78;
+  color: var(--ink-dim);
 }
 
 /* --- how to read --- */

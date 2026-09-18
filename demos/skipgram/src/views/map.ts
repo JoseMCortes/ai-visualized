@@ -50,7 +50,7 @@ export function createMap(host: HTMLElement): WordMap {
        <path d="M0,0 L7,3.5 L0,7 Z" fill="${fill}"/>
      </marker>`;
   defs.innerHTML =
-    head('ah-pull', '#4ade80') + head('ah-push', '#f87171') + head('ah-center', '#e8e8ec');
+    head('ah-pull', '#16a34a') + head('ah-push', '#dc2626') + head('ah-center', '#16161a');
   svg.appendChild(defs);
   host.replaceChildren(svg);
 

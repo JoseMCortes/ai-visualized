@@ -20,7 +20,8 @@
     "dev:word2vec": "npm run dev --workspace @ai-visualized/word2vec",
     "dev:prompt-injection": "npm run dev --workspace @ai-visualized/prompt-injection",
     "dev:rag-ranking": "npm run dev --workspace @ai-visualized/rag-ranking",
-    "dev:softmax-temperature": "npm run dev --workspace @ai-visualized/softmax-temperature"
+    "dev:softmax-temperature": "npm run dev --workspace @ai-visualized/softmax-temperature",
+    "dev:langchain-utils": "npm run dev --workspace @ai-visualized/langchain-utils"
   },
   "devDependencies": {
     "prettier": "^3.3.3",

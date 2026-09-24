@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LangChain Utils, Live</title>
+    <meta
+      name="description"
+      content="A small, real LangChain pipeline — prompt template, model, structured output parser — running with your own API key, entirely in your browser."
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>LangChain Utils, Live</h1>
+        <p class="sub">
+          LangChain isn't an algorithm to reimplement — it's a set of utilities for gluing prompts,
+          models, and parsers together. So this page runs the <strong>real library</strong>: a
+          prompt template, a model call, and a structured output parser, composed with LCEL's
+          <code>.pipe()</code> and actually executed, using your own API key.
+        </p>
+        <p class="disclaimer">
+          <strong>This makes a real API call</strong> straight from your browser to OpenAI or
+          Anthropic, using a key you paste in below. It's stored only in this browser
+          (<code>localStorage</code>) and sent only to the provider you choose — never to any server
+          we operate — but it will use your account's quota and may incur a small real cost. Calling
+          a provider directly from client-side code like this needs an explicit opt-in
+          (<code>dangerouslyAllowBrowser</code>) for exactly that reason: a real product should
+          proxy these calls through a server so the key never reaches a browser at all. This page is
+          for seeing the mechanism work, not a template for production.
+        </p>
+      </header>
+
+      <section id="app"></section>
+
+      <section class="howto">
+        <h2>How to read this</h2>
+        <ol>
+          <li>
+            <strong>The template</strong> runs immediately, with no key — it's pure string
+            substitution. <code>ChatPromptTemplate.fromMessages([...])</code> fills your review text
+            and the parser's "answer in this shape" instructions into a system + human message pair.
+          </li>
+          <li>
+            <strong>The model</strong> is the one line that changes between providers —
+            <code>ChatOpenAI</code> or <code>ChatAnthropic</code> — everything upstream and
+            downstream of it is identical either way. That's the actual value LangChain adds: write
+            the chain once, swap the model underneath it.
+          </li>
+          <li>
+            <strong>The parser</strong> is built from the same <code>zod</code> schema twice: once
+            to generate the formatting instructions the model is told to follow, and once to
+            validate and parse whatever text comes back into a real typed object.
+          </li>
+          <li>
+            <strong>The chain</strong> — <code>prompt.pipe(model).pipe(outputParser)</code> — is
+            LCEL: three independent pieces composed with <code>.pipe()</code> into one runnable. The
+            demo calls the three pieces one at a time instead of through the composed chain, purely
+            so every intermediate value stays visible — the request that reaches the provider is
+            identical either way.
+          </li>
+        </ol>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

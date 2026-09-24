@@ -9,6 +9,7 @@ name: Deploy demos to Pages
 #   /ai-visualized/prompt-injection/  demos/prompt-injection
 #   /ai-visualized/rag-ranking/  demos/rag-ranking
 #   /ai-visualized/softmax-temperature/  demos/softmax-temperature
+#   /ai-visualized/langchain-utils/  demos/langchain-utils
 
 on:
   push:
@@ -70,9 +71,14 @@ jobs:
         env:
           VITE_BASE: /ai-visualized/softmax-temperature/
 
+      - name: Build langchain-utils demo
+        run: npm run build --workspace @ai-visualized/langchain-utils
+        env:
+          VITE_BASE: /ai-visualized/langchain-utils/
+
       - name: Assemble site
         run: |
-          mkdir -p site/transformer site/embeddings site/skipgram site/word2vec site/prompt-injection site/rag-ranking site/softmax-temperature
+          mkdir -p site/transformer site/embeddings site/skipgram site/word2vec site/prompt-injection site/rag-ranking site/softmax-temperature site/langchain-utils
           cp landing/index.html site/index.html
           cp -r demos/transformer-attention/dist/* site/transformer/
           cp -r demos/embeddings/dist/* site/embeddings/
@@ -81,6 +87,7 @@ jobs:
           cp -r demos/prompt-injection/dist/* site/prompt-injection/
           cp -r demos/rag-ranking/dist/* site/rag-ranking/
           cp -r demos/softmax-temperature/dist/* site/softmax-temperature/
+          cp -r demos/langchain-utils/dist/* site/langchain-utils/
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

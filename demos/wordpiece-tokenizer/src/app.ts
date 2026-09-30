@@ -52,11 +52,11 @@ export function mountApp(root: HTMLElement): void {
   root.replaceChildren(
     corpus.section,
     training,
+    playgroundPanel.section,
     scores.section,
     vocab.section,
     inCorpus.section,
     heldOut.section,
-    playgroundPanel.section,
   );
 
   createCorpusPanel(corpus.body, CORPUS);
@@ -78,7 +78,7 @@ export function mountApp(root: HTMLElement): void {
     title: 'Never seen during training',
     note:
       'These were never in the training data. Each is tokenized live against whatever ' +
-      'vocabulary exists so far — the same thing the playground below does.',
+      'vocabulary exists so far — the same thing the playground above does.',
   });
   heldOut.body.appendChild(heldOutWords.el);
 

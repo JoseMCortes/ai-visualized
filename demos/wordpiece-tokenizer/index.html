@@ -53,7 +53,7 @@
           </li>
           <li>
             <strong>Tokenizing new text</strong> (the words never in training, and anything you type
-            below) is a separate step: greedy longest-match, left to right. At each position it
+            above) is a separate step: greedy longest-match, left to right. At each position it
             looks for the longest piece in the vocabulary and takes it. If no piece at all matches —
             not even a single character — the <em>whole word</em> becomes <code>[UNK]</code>.
             WordPiece doesn't partially cover a word; one uncovered character sinks the entire

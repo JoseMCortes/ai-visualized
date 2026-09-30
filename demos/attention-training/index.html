@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Training an Attention Head</title>
+    <meta
+      name="description"
+      content="Forward pass, loss, backward pass, and a gradient-descent update on one real attention head — Q/K/V matrices trained from scratch and checked against PyTorch, then used on a new sentence."
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Training an Attention Head</h1>
+        <p class="sub">
+          Self-attention has three learned matrices — W_Q, W_K, W_V — and training nudges all three
+          by gradient descent, the same as any other layer. This demo trains one real attention head
+          on a 3-token, 3-dimensional toy example small enough to watch every number:
+          <code>"the cat sat"</code>, with "sat" as the query, learning to pull in information from
+          its subject, "cat".
+        </p>
+        <p class="disclaimer">
+          Every matrix here is real linear algebra, not illustration — forward pass, MSE loss,
+          hand-derived backprop, and a learning-rate-0.5 update, checked line by line against the
+          PyTorch snippet below (every gradient matches PyTorch's autograd to the last printed
+          digit). What's <em>not</em> real: a single training example repeated forever, one head
+          instead of many in parallel, 3 dimensions instead of hundreds, and a target vector handed
+          directly rather than arriving indirectly through next-token loss several layers later. The
+          mechanics — forward, loss, gradients, update — are exactly what you see here.
+        </p>
+      </header>
+
+      <section id="app"></section>
+
+      <section class="howto">
+        <h2>How to read this</h2>
+        <ol>
+          <li>
+            <strong>Q, K, V are just three learned lenses</strong> on the same embeddings.
+            <code>q = x · W_Q</code> asks "what am I looking for?" (only the query token needs one);
+            <code>K = X · W_K</code> and <code>V = X · W_V</code> give every token a "what do I
+            offer as a match?" and "what do I actually hand over?".
+          </li>
+          <li>
+            <strong>The √3 in the scores</strong> is the same scaling real transformers use —
+            without it, scores grow with dimension and softmax saturates into a near one-hot
+            distribution regardless of what the matrices have learned.
+          </li>
+          <li>
+            <strong>The backward pass</strong> sends the error at the output back through the
+            softmax and both linear projections. W_V's gradient is usually the largest, since values
+            feed the output directly with no softmax in between softening it — watch which matrix
+            the step narration names as the biggest mover; it isn't always W_V.
+          </li>
+          <li>
+            <strong>A note on what "learning" looks like here:</strong> after a few steps the loss
+            collapses to nearly zero, but attention doesn't fully swing onto "cat" — "sat" keeps
+            attending to itself the most, even once training has converged. Most of the actual fix
+            comes from W_V reshaping the values themselves, not from attention isolating the
+            subject. That's a real, checked property of this small example, not a simplification.
+          </li>
+          <li>
+            <strong>Part 2</strong> reuses the exact same <code>forward()</code> — nothing
+            special-cased — on a brand-new sentence, with the last word as the query and the
+            matrices frozen wherever training currently stands.
+          </li>
+        </ol>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

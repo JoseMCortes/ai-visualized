@@ -30,6 +30,7 @@ write-up of the math and the design trade-offs.
 | **Softmax with Temperature**                | drag one dial and watch a probability distribution reshape live, from nearly one-hot to nearly uniform, with the full arithmetic and a probability-vs-T chart per entry                         | [live](https://josemcortes.github.io/ai-visualized/softmax-temperature/) · [`demos/softmax-temperature/`](./demos/softmax-temperature/) |
 | **LangChain Utils, Live**                   | the real LangChain library running in-browser against your own OpenAI/Anthropic key — a prompt template, a model call, and a structured output parser, composed with LCEL and actually executed | [live](https://josemcortes.github.io/ai-visualized/langchain-utils/) · [`demos/langchain-utils/`](./demos/langchain-utils/)             |
 | **WordPiece Tokenizer, Step by Step**       | the subword tokenizer BERT uses, trained from scratch in-browser — watch the vocabulary grow one merge at a time and a never-seen word split into real, recognizable pieces                     | [live](https://josemcortes.github.io/ai-visualized/wordpiece-tokenizer/) · [`demos/wordpiece-tokenizer/`](./demos/wordpiece-tokenizer/) |
+| **Training an Attention Head**              | forward pass, MSE loss, hand-derived backprop, and a gradient update on one real self-attention head — W_Q/W_K/W_V trained from scratch, checked against PyTorch, then used on a new sentence   | [live](https://josemcortes.github.io/ai-visualized/attention-training/) · [`demos/attention-training/`](./demos/attention-training/)    |
 
 More are planned (autograd, an MLP playground, a tokenizer explorer, a tiny
 diffusion model, some classic ML) — added here as they land.
@@ -57,6 +58,7 @@ demos/
   softmax-temperature/     # softmax-with-temperature: drag T, watch the distribution reshape
   langchain-utils/         # the real LangChain library, running in-browser against your own key
   wordpiece-tokenizer/     # BERT's subword tokenizer, trained from scratch, one merge at a time
+  attention-training/      # one self-attention head, trained from scratch, checked against PyTorch
 training/                  # PyTorch training + export for the GPT
 landing/                   # the gallery page for the deployed site
 ```

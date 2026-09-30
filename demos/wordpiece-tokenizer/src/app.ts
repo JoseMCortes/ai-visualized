@@ -7,6 +7,7 @@
  */
 
 import { CORPUS, HELD_OUT_WATCH_WORDS, IN_CORPUS_WATCH_WORDS } from './lib/corpus';
+import { describeStep } from './lib/describeStep';
 import { tokenizeText, tokenizeWord } from './lib/tokenize';
 import { initTrainer, rankCandidates, trainStep, type TrainerState } from './lib/wordpiece';
 import { createCorpusPanel } from './views/corpusPanel';
@@ -37,11 +38,16 @@ function panel(label?: string): { section: HTMLElement; body: HTMLElement; title
 export function mountApp(root: HTMLElement): void {
   const corpus = panel('Training corpus (word · count)');
   const training = document.createElement('div');
-  training.className = 'panel training-panel';
+  training.className = 'panel';
+  const trainingRow = document.createElement('div');
+  trainingRow.className = 'training-panel';
   const controlsHost = document.createElement('div');
   const counters = document.createElement('div');
   counters.className = 'counters';
-  training.append(controlsHost, counters);
+  trainingRow.append(controlsHost, counters);
+  const narration = document.createElement('p');
+  narration.className = 'step-narration';
+  training.append(trainingRow, narration);
 
   const scores = panel('Candidate merges for the next step (top 6, highest score first)');
   const vocab = panel('Learned vocabulary');
@@ -137,8 +143,13 @@ export function mountApp(root: HTMLElement): void {
     playground.renderResult(tokenizeText(playgroundText, trainer.vocab));
   }
 
+  function renderNarration(justAdvanced: number): void {
+    narration.textContent = describeStep(trainer, finished, justAdvanced);
+  }
+
   function renderAll(newestCount: number): void {
     renderCounters();
+    renderNarration(newestCount);
     renderScoreTable();
     renderVocab(newestCount);
     renderWatchWords();

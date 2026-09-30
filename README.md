@@ -29,6 +29,7 @@ write-up of the math and the design trade-offs.
 | **Ranking Documents for RAG**               | six document-ranking methods (TF-IDF → BM25 → embeddings → hybrid → a toy cross-encoder → learning to rank) on the same documents, every score broken down step by step                         | [live](https://josemcortes.github.io/ai-visualized/rag-ranking/) · [`demos/rag-ranking/`](./demos/rag-ranking/)                         |
 | **Softmax with Temperature**                | drag one dial and watch a probability distribution reshape live, from nearly one-hot to nearly uniform, with the full arithmetic and a probability-vs-T chart per entry                         | [live](https://josemcortes.github.io/ai-visualized/softmax-temperature/) · [`demos/softmax-temperature/`](./demos/softmax-temperature/) |
 | **LangChain Utils, Live**                   | the real LangChain library running in-browser against your own OpenAI/Anthropic key — a prompt template, a model call, and a structured output parser, composed with LCEL and actually executed | [live](https://josemcortes.github.io/ai-visualized/langchain-utils/) · [`demos/langchain-utils/`](./demos/langchain-utils/)             |
+| **WordPiece Tokenizer, Step by Step**       | the subword tokenizer BERT uses, trained from scratch in-browser — watch the vocabulary grow one merge at a time and a never-seen word split into real, recognizable pieces                     | [live](https://josemcortes.github.io/ai-visualized/wordpiece-tokenizer/) · [`demos/wordpiece-tokenizer/`](./demos/wordpiece-tokenizer/) |
 
 More are planned (autograd, an MLP playground, a tokenizer explorer, a tiny
 diffusion model, some classic ML) — added here as they land.
@@ -55,6 +56,7 @@ demos/
   rag-ranking/             # document-ranking methods for RAG, compared side by side
   softmax-temperature/     # softmax-with-temperature: drag T, watch the distribution reshape
   langchain-utils/         # the real LangChain library, running in-browser against your own key
+  wordpiece-tokenizer/     # BERT's subword tokenizer, trained from scratch, one merge at a time
 training/                  # PyTorch training + export for the GPT
 landing/                   # the gallery page for the deployed site
 ```

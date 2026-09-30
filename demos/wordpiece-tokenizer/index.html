@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WordPiece Tokenizer, Step by Step</title>
+    <meta
+      name="description"
+      content="Watch a WordPiece tokenizer learn its vocabulary from scratch, one merge at a time — the same subword-splitting algorithm behind BERT, trained live in the browser."
+    />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>WordPiece Tokenizer, Step by Step</h1>
+        <p class="sub">
+          Every word starts split into single characters. One merge at a time, the algorithm
+          combines whichever adjacent pair of pieces scores highest — until common word fragments
+          like <code>##ing</code> and <code>un</code> become tokens of their own. This is the
+          subword algorithm BERT uses. Step through it, or press Play.
+        </p>
+        <p class="disclaimer">
+          Trained from scratch, in your browser, on a ~55-word toy corpus — real WordPiece
+          vocabularies are trained on billions of words and stopped early at a target size (often
+          30,000 tokens) specifically so they still generalize to words they've never seen. This
+          corpus is small enough to run all the way to the end, where every word becomes a single
+          token — which is the point where a real tokenizer would already have stopped.
+        </p>
+      </header>
+
+      <section id="app"></section>
+
+      <section class="howto">
+        <h2>How to read this</h2>
+        <ol>
+          <li>
+            <strong>A "piece" is a symbol</strong> — a single character at first, later a merged
+            chunk. A piece that continues a word (rather than starting one) is marked with a leading
+            <code>##</code>, e.g. <code>##ing</code> — that marker is real, literal token text a
+            WordPiece tokenizer actually emits, not decoration.
+          </li>
+          <li>
+            <strong>The score isn't just frequency.</strong>
+            <code>score = freq(pair) / (freq(left) × freq(right))</code> — dividing by how common
+            each piece already is on its own means two rare pieces that almost only ever appear
+            together can outrank two very common pieces that simply collide a lot. That
+            normalization is WordPiece's actual difference from plain BPE, which would just merge
+            the single most frequent pair.
+          </li>
+          <li>
+            <strong>Merging</strong> replaces every occurrence of the winning pair, in every word,
+            with one new symbol — added to the vocabulary for good.
+          </li>
+          <li>
+            <strong>Tokenizing new text</strong> (the words never in training, and anything you type
+            below) is a separate step: greedy longest-match, left to right. At each position it
+            looks for the longest piece in the vocabulary and takes it. If no piece at all matches —
+            not even a single character — the <em>whole word</em> becomes <code>[UNK]</code>.
+            WordPiece doesn't partially cover a word; one uncovered character sinks the entire
+            thing.
+          </li>
+        </ol>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
